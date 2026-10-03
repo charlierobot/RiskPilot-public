@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {"path": "/", "title": "Dashboard RiskPilot"},
+    {"path": "/upload/", "title": "Carica dataset"},
+    {"path": "/demo/", "title": "Dataset demo"},
+    {"path": "/analysis/:id/", "title": "Dashboard analisi"},
+    {"path": "/analysis/:id/report/", "title": "Report analisi"},
+    {"path": "/analysis/:id/record/:record_id/", "title": "Dettaglio record"}
+  ]
+}

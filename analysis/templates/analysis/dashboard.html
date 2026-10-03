@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Analisi #{{ analysis.id }} — RiskPilot{% endblock %}
+{% block page_heading %}Analisi #{{ analysis.id }}{% endblock %}
+{% block content %}
+<div class="analysis-meta">
+  <span class="file-pill">◉ {{ analysis.upload.filename }}
+  </span>
+  <span>Importato il {{analysis.created_at|date:'d/m/Y H:i' }}
+
+  </span>
+  <a href="{% url 'analysis:report' analysis.id %}"
+    class="report-link">Apri report completo →</a>
+</div>
+<section class="kpi-grid mt-4">
+  <div class="kpi-card">
+    <span>RECORD ANALIZZATI</span>
+    <strong>{{ analysis.total_records }}</strong>
+    <small>righe valide processate </small>
+  </div>
+  <div class="kpi-card risk-high">
+    <span>ALTO RISCHIO</span>
+    <strong>{{ analysis.high_risk_count }}</strong>
+    <small>{{analysis.risk_percentage }}% del dataset</small>
+  </div>
+
+
+  <div class="kpi-card risk-medium">
+    <span>MEDIO RISCHIO</span>
+    <strong>{{ analysis.medium_risk_count }}</strong>
+    <small>richiede review mirata</small>
+  </div>
+
+  <div class="kpi-card">
+    <span>SEGNALI RILEVATI</span>
+    <strong>{{ analysis.anomaly_count }}</strong>
+    <small>su {{analysis.total_records }} record</small>
+  </div>
+
+
+</section>
+<div class="row g-4 mt-1">
+  <div class="col-lg-7">
+    <section class="panel-card h-100">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">RISK DISTRIBUTION</p>
+          <h2>Dove guardare prima</h2>
+        </div><a href="{% url 'analysis:report' analysis.id %}" class="text-link">Filtra report</a>
+      </div>
+      <div class="distribution">
+        <div class="distribution-row">
+          <div class="d-flex justify-content-between"> <span>Basso rischio</span>
+            <strong>
+            {{ analysis.low_risk_count}}
+            </strong>
+          </div>
+
+          <div class="bar"><i class="bar-low"
+              style="width: {% widthratio analysis.low_risk_count analysis.total_records 100 %}%"></i></div>
+        </div>
+
+        <div class="distribution-row">
+          <div class="d-flex justify-content-between"><span>Medio rischio</span><strong>{{ analysis.medium_risk_count}}</strong>
+          </div>
+
+
+
+          <div class="bar"><i class="bar-medium"
+              style="width: {% widthratio analysis.medium_risk_count analysis.total_records 100 %}%"></i>
+          </div>
+        </div>
+
+
+        <div class="distribution-row">
+          <div class="d-flex justify-content-between"><span>Alto rischio</span><strong>{{ analysis.high_risk_count}}</strong>
+          </div>
+          <div class="bar"><i class="bar-high"
+              style="width: {% widthratio analysis.high_risk_count analysis.total_records 100 %}%"></i>
+          </div>
+        </div>
+      </div>
+      <div class="insight-callout"><span>i</span>
+        <p> <strong>Interpretazione:</strong> 
+          il punteggio non dimostra una frode. 
+          Indica soltanto quali record meritano
+          una verifica umana e perché.</p>
+      </div>
+    </section>
+  </div>
+  <div class="col-lg-5">
+    <section class="panel-card h-100">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PRIORITY QUEUE</p>
+          <h2>Segnali forti</h2>
+        </div>
+      </div>{% for record in high_records %}
+      <a class="priority-row"
+        href="{% url 'analysis:record_detail' analysis.id record.id %}">
+        <span class="priority-score"> {{ record.risk_score }}
+        </span>
+          <span>
+            <strong>{{ record.transaction_id }}</strong>
+            <small>{{ record.vendor }} · {{record.reasons.0|default:'Nessuna motivazione' }}
+            </small>
+          </span>
+          <span>→</span>
+        </a>{% empty %}<p class="muted-copy">Nessun record ad alto rischio in questa analisi.</p>
+        {% endfor %}
+        <a href="{% url 'analysis:report' analysis.id %}?level=high" 
+        class="btn btn-outline-dark w-100 mt-3"> 
+          Vedi tutti i segnali forti</a>
+    </section>
+  </div>
+</div>
+{% endblock %}

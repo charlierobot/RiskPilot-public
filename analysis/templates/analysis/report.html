@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Report #{{ analysis.id }} — RiskPilot{% endblock %}
+{% block page_heading %}Report dei record{% endblock %}
+{% block content %}
+<div class="analysis-meta">
+  <span class="file-pill">◉ {{ analysis.upload.filename }}
+  </span><span>{{ analysis.total_records }} record · {{ analysis.anomaly_count }} segnali </span>
+  <a href="{% url 'analysis:analysis_dashboard' analysis.id %}" class="report-link">← Torna alla dashboard</a>
+</div>
+<section class="panel-card mt-4">
+  <form method="get" class="filter-bar">
+    <div class="search-wrap"><span>⌕</span>
+      <input type="search" name="q" value="{{ query }}"
+        placeholder="Cerca ID o vendor">
+    </div>
+    <select name="level">
+      <option value="">Tutti i livelli</option>
+      <option value="low" {% if active_level == 'low'%} selected {% endif %}> Basso</option>
+      <option value="medium" {% if active_level == 'medium'%} selected {% endif %}> Medio</option>
+      <option value="high" {% if active_level == 'high'%} selected {% endif %}> Alto</option>
+    </select>
+    <button class="btn btn-dark" type="submit">Applica filtri </button>
+    {% if query or active_level %}
+    <a class="clear-filter" href="{% url 'analysis:report' analysis.id %}">Azzera</a>
+    {% endif %}
+  </form>
+  <div class="table-responsive">
+    <table class="table report-table align-middle">
+      <thead>
+        <tr>
+          <th>RECORD</th>
+          <th>DATA</th>
+          <th>VENDOR</th>
+          <th>IMPORTO</th>
+          <th>SEGNALE</th>
+          <th>SCORING</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>{% for record in page_obj %}<tr>
+          <td><strong>{{ record.transaction_id }}</strong><small>{{ record.category }}</small></td>
+          <td>{{ record.date|date:'d M Y' }}</td>
+          <td>{{ record.vendor }} <small>{{ record.country }} </small></td>
+          <td> € {{ record.amount|floatformat:2 }} </td>
+          <td>
+            <span class="risk-badge risk-{{ record.risk_level }}">{{ record.get_risk_level_display }} </span>
+          </td>
+          <td>
+            <div class="score-cell"><strong>{{ record.risk_score }} </strong>
+              <div class="score-track"><i class="score-{{ record.risk_level }}"
+                  style="width: {{ record.risk_score }}%"> </i> </div>
+            </div>
+          </td>
+          <td>
+            <a class="detail-link" href="{% url 'analysis:record_detail' analysis.id record.id %}">Dettaglio →</a>
+          </td>
+        </tr> {% empty %} <tr>
+          <td colspan="7" class="empty-table">Nessun record corrisponde ai filtri.</td>
+        </tr> {% endfor %} </tbody>
+    </table>
+  </div>
+  {% if page_obj.paginator.num_pages > 1 %}<nav class="pagination-row" aria-label="Paginazione">
+    <span>Pagina {{page_obj.number }} di {{ page_obj.paginator.num_pages }}</span>
+    <div>{% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}&level={{ active_level }}&q={{ query }}">← Precedente</a>
+        {% endif%} {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}&level={{ active_level }}&q={{ query }}">Successiva →</a> {% endif %}
+    </div>
+  </nav> 
+  {% endif %}
+</section>
+{% endblock %}

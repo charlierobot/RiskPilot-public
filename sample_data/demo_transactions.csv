@@ -1,0 +1,9 @@
+transaction_id,date,amount,vendor,country,approved_by,category
+TX-1001,2026-09-01,245.90,Alfa Office SRL,IT,Mario Rossi,Office
+TX-1002,2026-09-02,6800.00,North Travel GmbH,DE,Laura Bianchi,Travel
+TX-1003,2026-09-05,12500.00,Orion Advisory,IT,pending,Consulting
+TX-1004,2026-09-06,920.00,Delta Supplies,IT,Giulia Verdi,Gifts
+TX-1005,2026-09-08,320.00,Blue Logistics,FR,Marco Neri,Logistics
+TX-1006,2026-09-12,5400.00,Polar Imports,RU,non approvato,Cash
+TX-1007,2026-09-14,75.50,Centro Servizi,IT,Mario Rossi,Office
+TX-1008,2026-09-18,2100.00,East Consulting,PL,Laura Bianchi,Consulting

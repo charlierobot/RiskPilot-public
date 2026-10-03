@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">RiskPilot — Human-centered transaction protection</title>
+  <desc id="desc">Scudo verde semplice con robot amichevole e simbolo euro sul petto</desc>
+  <rect width="256" height="256" rx="28" fill="#111C2C"/>
+
+  <!-- Scudo semplice -->
+  <path d="M128 35 194 60v56c0 48-27 81-66 104-39-23-66-56-66-104V60l66-25Z" fill="#35C98A"/>
+  <path d="M128 57 174 75v40c0 32-17 58-46 78-29-20-46-46-46-78V75l46-18Z" fill="#F7F4EE"/>
+
+  <!-- Antenna -->
+  <path d="M128 73V58" stroke="#111C2C" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="128" cy="51" r="5" fill="#111C2C"/>
+
+  <!-- Robot amichevole -->
+  <rect x="91" y="76" width="74" height="57" rx="18" fill="#111C2C"/>
+  <path d="M91 103h-9M165 103h9" stroke="#111C2C" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="113" cy="101" r="7" fill="#F7F4EE"/>
+  <circle cx="143" cy="101" r="7" fill="#F7F4EE"/>
+  <path d="M113 116c5 5 12 5 15 0" fill="none" stroke="#35C98A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Corpo morbido con simbolo euro -->
+  <path d="M101 136h54v39c0 10-8 18-18 18h-18c-10 0-18-8-18-18v-39Z" fill="#111C2C"/>
+  <text x="128" y="169" text-anchor="middle" font-family="Arial, sans-serif" font-size="29" font-weight="700" fill="#35C98A">€</text>
+
+  <!-- Mani aperte: protezione centrata sulla persona -->
+  <path d="M101 148 88 160M155 148l13 12" stroke="#111C2C" stroke-width="8" stroke-linecap="round"/>
+</svg>

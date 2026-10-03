@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Nuova analisi — RiskPilot{% endblock %}
+{% block page_heading %}Carica un dataset{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-7">
+    <section class="panel-card">
+      <div class="section-heading"><div><p class="eyebrow">STEP 01 / DATA QUALITY</p><h2>Importa il file CSV</h2></div><span class="step-chip">CSV · max 5 MB</span></div>
+      <p class="muted-copy">Il file viene controllato sul server prima di essere trasformato in un’analisi. I dati rimangono nel database locale SQLite.</p>
+      <form method="post" enctype="multipart/form-data" class="upload-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label class="file-drop" for="id_dataset">
+          <span class="upload-icon">↑</span>
+          <strong>Scegli il CSV da analizzare</strong>
+          <span>oppure trascinalo qui · UTF-8</span>
+          {{ form.dataset }}
+        </label>
+        {% if form.dataset.errors %}<div class="text-danger small mt-2">{{ form.dataset.errors }}</div>{% endif %}
+        <div class="required-columns"><strong>Colonne obbligatorie</strong><code>transaction_id · date · amount · vendor · country · approved_by · category</code></div>
+        <button class="btn btn-primary mt-4" type="submit">Valida e analizza →</button>
+      </form>
+    </section>
+  </div>
+  <div class="col-lg-5">
+    <section class="panel-card panel-dark">
+      <p class="eyebrow text-amber">WHY IT MATTERS</p>
+      <h2>Prima la qualità, poi il rischio.</h2>
+      <p>Un risultato di scoring è utile soltanto se il dato di partenza è comprensibile e coerente. Per questo il flusso separa il controllo del CSV dalla valutazione dei record.</p>
+      <hr>
+      <div class="mini-rule"><span>01</span><div><strong>Formato</strong><small>UTF-8, estensione CSV, limite dimensione</small></div></div>
+      <div class="mini-rule"><span>02</span><div><strong>Completezza</strong><small>Colonne richieste e valori non vuoti</small></div></div>
+      <div class="mini-rule"><span>03</span><div><strong>Coerenza</strong><small>Date, importi, duplicati e paesi</small></div></div>
+    </section>
+  </div>
+</div>
+{% endblock %}

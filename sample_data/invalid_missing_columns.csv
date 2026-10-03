@@ -1,0 +1,2 @@
+transaction_id,amount,vendor
+BAD-001,not-a-number,Vendor senza schema completo

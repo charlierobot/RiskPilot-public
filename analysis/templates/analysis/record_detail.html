@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ record.transaction_id }} — RiskPilot{% endblock %}
+{% block page_heading %}Dettaglio {{ record.transaction_id }}{% endblock %}
+{% block content %}
+<div class="analysis-meta">
+    <span class="file-pill">◉ {{ analysis.upload.filename }}</span>
+    <a href="{% url 'analysis:report' analysis.id %}" class="report-link">← Torna al report</a>
+</div>
+<div class="row g-4 mt-2"><div class="col-lg-5">
+    <section class="panel-card score-hero score-{{ record.risk_level }}">
+        <p class="eyebrow">RISK SCORE</p><div class="big-score">
+            {{ record.risk_score }}
+            <small>/100</small>
+</div>
+<span class="risk-badge risk-{{ record.risk_level }}">
+    {{ record.get_risk_level_display }} rischio
+</span>
+<p class="muted-copy mt-3">Il livello è una priorità di revisione, non una conclusione automatica.</p>
+</section> </div>
+
+<div class="col-lg-7">
+    <section class="panel-card">
+        <p class="eyebrow">WHY THIS RECORD</p><h2>Fattori rilevati</h2>
+        <div class="reason-list">
+            {% for reason in record.reasons %}
+            <div class="reason-item">
+                <span>+</span><p>{{ reason }}</p>
+            </div> {% empty %}
+            <p class="muted-copy">Nessun segnale rilevante secondo le regole attive.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+</div>
+<section class="panel-card mt-4">
+    <div class="section-heading"> 
+    <div>
+        <p class="eyebrow">RECORD CONTEXT</p>
+        <h2>Contesto del dato</h2>
+    </div>
+    </div>
+    <div class="detail-grid">
+    <div>
+        <span>ID transazione</span><strong>{{ record.transaction_id }}</strong>
+    </div>
+    <div>
+        <span>Data</span><strong>{{ record.date|date:'d/m/Y' }}</strong>
+    </div>
+    <div> <span>Importo</span><strong>€ {{ record.amount|floatformat:2 }}</strong>
+    </div>
+    <div>
+    <span>Vendor</span>
+    <strong>{{ record.vendor }}</strong>
+    </div>
+    <div>
+    <span>Paese</span>
+    <strong>{{ record.country }}</strong>
+    </div>
+    <div><span>Approvato da</span><strong>{{ record.approved_by }}</strong>
+    </div>
+
+    <div>
+    <span>Categoria</span>
+    <strong>{{ record.category }}</strong>
+</div>
+</div>
+</section>
+{% endblock %}

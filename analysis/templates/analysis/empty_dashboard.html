@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Inizia — RiskPilot{% endblock %}
+{% block page_heading %}Prima analisi, zero attrito{% endblock %}
+{% block content %}
+<section class="hero-card">
+  <div class="hero-copy">
+    <p class="eyebrow">START HERE</p>
+    <h2>Trasforma un CSV in segnali di rischio spiegabili.</h2>
+    <p class="lead">Carica un dataset aziendale o usa i dati demo per vedere il percorso completo: controllo qualità, regole deterministiche, scoring e report.</p>
+    <div class="d-flex gap-2 flex-wrap">
+      <a class="btn btn-primary" href="{% url 'analysis:demo' %}">Inizia con il dataset demo</a>
+      <a class="btn btn-outline-secondary" href="{% url 'analysis:upload' %}">Carica il mio CSV</a>
+    </div>
+  </div>
+  <div class="hero-signal"><span class="signal-number">7</span><span>regole di controllo<br>pronte all’uso</span></div>
+</section>
+<section class="three-col mt-4">
+  <article class="info-card"><span class="card-index">01</span><h3>Valida</h3><p>Colonne, date, importi, duplicati e codici paese vengono controllati prima dell’analisi.</p></article>
+  <article class="info-card"><span class="card-index">02</span><h3>Spiega</h3><p>Ogni score è accompagnato dai fattori che lo hanno determinato, senza una black box.</p></article>
+  <article class="info-card"><span class="card-index">03</span><h3>Decidi</h3><p>La dashboard aiuta a capire dove concentrare la revisione umana.</p></article>
+</section>
+{% endblock %}
