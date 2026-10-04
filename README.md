@@ -2,9 +2,9 @@
 
 ## Compliance & Risk Dashboard in Django
 
-RiskPilot è un prototipo portfolio-ready che simula un piccolo flusso di controllo aziendale. Parte da un file CSV contenente transazioni o controlli, verifica la qualità del dato, applica regole di rischio deterministiche e presenta i risultati in una dashboard leggibile.
+RiskPilot è un prototipo che simula un piccolo flusso di controllo aziendale. Parte da un file CSV contenente transazioni o controlli, verifica la qualità del dato, applica regole di rischio deterministiche e presenta i risultati in una dashboard leggibile.
 
-Il progetto non vuole dimostrare di aver costruito un prodotto enterprise completo: vuole dimostrare di saper trasformare un problema aziendale in un flusso software comprensibile, verificabile e documentato.
+Il progetto non vuole dimostrare di aver costruito un prodotto enterprise completo: vuole dimostrare di saper trasformare un problema in un flusso software comprensibile, verificabile e documentato.
 
 ----
 
